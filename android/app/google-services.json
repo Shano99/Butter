@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "616592078923",
+    "firebase_url": "https://butter-ab542.firebaseio.com",
+    "project_id": "butter-ab542",
+    "storage_bucket": "butter-ab542.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:616592078923:android:0ee9285383d1e106dcf5ce",
+        "android_client_info": {
+          "package_name": "com.example.butter_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "616592078923-3j0g4ako2k767rorqhjbfj22nlop0527.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.butter_app",
+            "certificate_hash": "b71727e2e1766692c2c48fc4786b9abe2290da58"
+          }
+        },
+        {
+          "client_id": "616592078923-ril73vvkm9d1iauefm93cssp4acndjl1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAnuSUmq1ZEn708O6capXehTz3XQrav6Dg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "616592078923-ril73vvkm9d1iauefm93cssp4acndjl1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
