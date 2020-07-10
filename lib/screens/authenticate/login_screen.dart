@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class LoginScreen extends StatefulWidget {
+  final Function toggleView;
+  LoginScreen({this.toggleView});
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
@@ -228,7 +230,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget _buildSignupBtn() {
     return GestureDetector(
       onTap: () {
-        SignUpScreen();
+        widget.toggleView();
       },
       child: RichText(
         text: TextSpan(

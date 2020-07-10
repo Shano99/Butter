@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class SignUpScreen extends StatefulWidget {
+  final Function toggleView;
+  SignUpScreen({this.toggleView});
   @override
   _SignUpScreenState createState() => _SignUpScreenState();
 }
@@ -134,6 +136,36 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 
+  Widget _buildSignInBtn() {
+    return GestureDetector(
+      onTap: () {
+        widget.toggleView();
+      },
+      child: RichText(
+        text: TextSpan(
+          children: [
+            TextSpan(
+              text: 'Already have an Account? ',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 18.0,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+            TextSpan(
+              text: 'Sign In',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 18.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -183,6 +215,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       SizedBox(height: 30.0),
                       _buildEmailPasswordTF(),
                       _buildRegisterBtn(),
+                      _buildSignInBtn(),
                     ],
                   ),
                 ),
