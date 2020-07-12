@@ -1,4 +1,6 @@
 import 'package:butter_app/models/user.dart';
+import 'package:butter_app/screens/profile/profile_screen.dart';
+import 'package:butter_app/screens/settings/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -18,6 +20,13 @@ class _WrapperState extends State<Wrapper> {
     if (user == null) {
       return Authenticate();
     } else
-      return HomePage();
+      return MaterialApp(
+        initialRoute: '/',
+        routes: {
+          '/': (context) => HomePage(),
+          '/settings': (context) => SettingsScreen(),
+          '/profile': (context) => ProfileScreen(),
+        },
+      );
   }
 }
