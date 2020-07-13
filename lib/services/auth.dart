@@ -2,6 +2,8 @@ import 'package:butter_app/models/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+import 'database_service.dart';
+
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
@@ -34,6 +36,7 @@ class AuthService {
       AuthResult result = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
       FirebaseUser user = result.user;
+
       return _userFromFirebaseUser(user);
     } catch (e) {
       print(e.toString());
@@ -47,6 +50,8 @@ class AuthService {
       AuthResult result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       FirebaseUser user = result.user;
+      await DatabaseService(uid: user.uid)
+          .createUserData("ButterUser", "DOB", 0);
       return _userFromFirebaseUser(user);
     } catch (e) {
       print(e.toString());
@@ -90,6 +95,11 @@ class AuthService {
       print(currentUser);
       print("User Name : ${currentUser.displayName}");
       print("signed in " + user.displayName);
+      if (await DatabaseService(uid: currentUser.uid).checkUserExist()) {
+        await DatabaseService(uid: currentUser.uid)
+            .createUserData("ButterUser", "DOB", 0);
+        print("entered");
+      }
       return _userFromFirebaseUser(currentUser);
     } catch (e) {
       print("google sign in excepton" + e.toString());
