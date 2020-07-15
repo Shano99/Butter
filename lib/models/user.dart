@@ -6,7 +6,12 @@ class User {
 class UserData {
   final String uid;
   final String name;
-  final String dob;
-  final int totalpoints;
-  UserData({this.uid, this.name, this.dob, this.totalpoints});
+  final String age;
+  final String photoUrl;
+  final String cakeDay;
+  final String nickname;
+  final String phoneNumber;
+  final String country;
+
+  UserData({this.uid, this.name, this.nickname,this.age,this.photoUrl,this.cakeDay,this.phoneNumber,this.country});
 }
