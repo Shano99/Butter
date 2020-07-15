@@ -175,11 +175,12 @@ class _LoginScreenState extends State<LoginScreen> {
       onTap: () async {
         dynamic result;
         if (choose == "Google") {
+          loading = true;
           result = await _auth.googleSignIn();
         }
         if (result == null)
           setState(() {
-            //loading = false;
+            loading = false;
             error = "Could not login!!";
           });
       },

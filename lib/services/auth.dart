@@ -45,13 +45,22 @@ class AuthService {
   }
 
   //register
-  Future registerWithEmailAndPassword(String email, String password) async {
+  Future registerWithEmailAndPassword(
+      String name,
+      String age,
+      String photoUrl,
+      String cakeDay,
+      String nickname,
+      String phoneNumber,
+      String country,
+      String email,
+      String password) async {
     try {
       AuthResult result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       FirebaseUser user = result.user;
-      await DatabaseService(uid: user.uid)
-          .createUserData("ButterUser", "DOB", 0);
+      await DatabaseService(uid: user.uid).createUserData(
+          name, age, photoUrl, cakeDay, nickname, phoneNumber, country);
       return _userFromFirebaseUser(user);
     } catch (e) {
       print(e.toString());
@@ -92,12 +101,18 @@ class AuthService {
       assert(await user.getIdToken() != null);
       currentUser = await _auth.currentUser();
       assert(user.uid == currentUser.uid);
-      print(currentUser);
-      print("User Name : ${currentUser.displayName}");
-      print("signed in " + user.displayName);
+      String name = user.displayName;
+      String nickname = "ButterUser";
+      String photoUrl = "";
+      if (user.photoUrl != null) photoUrl = user.photoUrl;
+      String age = "18";
+      String country = "None";
+      String phoneNumber = "";
+      String cakeDay = DateTime.now().toString();
+      if (user.phoneNumber != null) phoneNumber = user.phoneNumber;
       if (await DatabaseService(uid: currentUser.uid).checkUserExist()) {
-        await DatabaseService(uid: currentUser.uid)
-            .createUserData("ButterUser", "DOB", 0);
+        await DatabaseService(uid: currentUser.uid).createUserData(
+            name, age, photoUrl, cakeDay, nickname, phoneNumber, country);
         print("entered");
       }
       return _userFromFirebaseUser(currentUser);

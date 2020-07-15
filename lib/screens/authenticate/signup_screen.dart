@@ -13,8 +13,14 @@ class SignUpScreen extends StatefulWidget {
 class _SignUpScreenState extends State<SignUpScreen> {
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
+  String name = "";
+  String nickname = "";
+  String age = "";
+  String country = "";
+  String cakeDay = DateTime.now().toString();
   String email = "";
   String password = "";
+  String phoneNumber = "";
   String error = "";
   bool loading = false;
   Widget _buildEmailPasswordTF() {
@@ -23,6 +29,114 @@ class _SignUpScreenState extends State<SignUpScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
+          Text(
+            'Name',
+            style: kLabelStyle,
+          ),
+          SizedBox(height: 10.0),
+          Container(
+            alignment: Alignment.centerLeft,
+            decoration: kBoxDecorationStyle,
+            height: 60.0,
+            child: TextFormField(
+              validator: (val) => val.isEmpty ? "Enter name" : null,
+              onChanged: (val) {
+                setState(() {
+                  name = val;
+                });
+              },
+              keyboardType: TextInputType.text,
+              style: TextStyle(
+                color: Colors.white,
+                fontFamily: 'OpenSans',
+              ),
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                contentPadding: EdgeInsets.only(top: 14.0),
+                prefixIcon: Icon(
+                  Icons.person,
+                  color: Colors.white,
+                ),
+                hintText: 'Enter your Name',
+                hintStyle: kHintTextStyle,
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 30.0,
+          ),
+          Text(
+            'Nickname',
+            style: kLabelStyle,
+          ),
+          SizedBox(height: 10.0),
+          Container(
+            alignment: Alignment.centerLeft,
+            decoration: kBoxDecorationStyle,
+            height: 60.0,
+            child: TextFormField(
+              validator: (val) => val.isEmpty ? "Enter nickname" : null,
+              onChanged: (val) {
+                setState(() {
+                  nickname = val;
+                });
+              },
+              keyboardType: TextInputType.text,
+              style: TextStyle(
+                color: Colors.white,
+                fontFamily: 'OpenSans',
+              ),
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                contentPadding: EdgeInsets.only(top: 14.0),
+                prefixIcon: Icon(
+                  Icons.person,
+                  color: Colors.white,
+                ),
+                hintText: 'Enter your Nickname',
+                hintStyle: kHintTextStyle,
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 30.0,
+          ),
+          Text(
+            'Age',
+            style: kLabelStyle,
+          ),
+          SizedBox(height: 10.0),
+          Container(
+            alignment: Alignment.centerLeft,
+            decoration: kBoxDecorationStyle,
+            height: 60.0,
+            child: TextFormField(
+              validator: (val) => val.isEmpty ? "Enter age" : null,
+              onChanged: (val) {
+                setState(() {
+                  age = val;
+                });
+              },
+              keyboardType: TextInputType.number,
+              style: TextStyle(
+                color: Colors.white,
+                fontFamily: 'OpenSans',
+              ),
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                contentPadding: EdgeInsets.only(top: 14.0),
+                prefixIcon: Icon(
+                  Icons.person,
+                  color: Colors.white,
+                ),
+                hintText: 'Enter your age',
+                hintStyle: kHintTextStyle,
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 30.0,
+          ),
           Text(
             'Email',
             style: kLabelStyle,
@@ -92,6 +206,78 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
             ),
           ),
+          SizedBox(
+            height: 30.0,
+          ),
+          Text(
+            'Phone Number',
+            style: kLabelStyle,
+          ),
+          SizedBox(height: 10.0),
+          Container(
+            alignment: Alignment.centerLeft,
+            decoration: kBoxDecorationStyle,
+            height: 60.0,
+            child: TextFormField(
+              validator: (val) => val.isEmpty ? "Enter phone number" : null,
+              onChanged: (val) {
+                setState(() {
+                  phoneNumber = val;
+                });
+              },
+              keyboardType: TextInputType.number,
+              style: TextStyle(
+                color: Colors.white,
+                fontFamily: 'OpenSans',
+              ),
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                contentPadding: EdgeInsets.only(top: 14.0),
+                prefixIcon: Icon(
+                  Icons.phone,
+                  color: Colors.white,
+                ),
+                hintText: 'Enter phone number',
+                hintStyle: kHintTextStyle,
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 30.0,
+          ),
+          Text(
+            'Country',
+            style: kLabelStyle,
+          ),
+          SizedBox(height: 10.0),
+          Container(
+            alignment: Alignment.centerLeft,
+            decoration: kBoxDecorationStyle,
+            height: 60.0,
+            child: TextFormField(
+              validator: (val) => val.isEmpty ? "enter country" : null,
+              onChanged: (val) {
+                country = val;
+              },
+              style: TextStyle(
+                color: Colors.white,
+                fontFamily: 'OpenSans',
+              ),
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                contentPadding: EdgeInsets.only(top: 14.0),
+                prefixIcon: Icon(
+                  Icons.map,
+                  color: Colors.white,
+                ),
+                hintText: 'Enter your country',
+                hintStyle: kHintTextStyle,
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 30.0,
+          ),
         ],
       ),
     );
@@ -108,8 +294,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
             setState(() {
               loading = true;
             });
-            dynamic result =
-                await _auth.registerWithEmailAndPassword(email, password);
+            dynamic result = await _auth.registerWithEmailAndPassword(name, age,
+                "", cakeDay, nickname, phoneNumber, country, email, password);
             if (result == null)
               setState(() {
                 loading = false;
