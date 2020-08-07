@@ -2,6 +2,7 @@ import 'package:butter_app/services/auth.dart';
 import 'package:butter_app/shared/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'dart:math';
 
 class SignUpScreen extends StatefulWidget {
   final Function toggleView;
@@ -47,7 +48,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               },
               keyboardType: TextInputType.text,
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.black,
                 fontFamily: 'OpenSans',
               ),
               decoration: InputDecoration(
@@ -55,7 +56,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 contentPadding: EdgeInsets.only(top: 14.0),
                 prefixIcon: Icon(
                   Icons.person,
-                  color: Colors.white,
+                  color: Colors.black,
                 ),
                 hintText: 'Enter your Name',
                 hintStyle: kHintTextStyle,
@@ -83,7 +84,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               },
               keyboardType: TextInputType.text,
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.black,
                 fontFamily: 'OpenSans',
               ),
               decoration: InputDecoration(
@@ -91,7 +92,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 contentPadding: EdgeInsets.only(top: 14.0),
                 prefixIcon: Icon(
                   Icons.person,
-                  color: Colors.white,
+                  color: Colors.black,
                 ),
                 hintText: 'Enter your Nickname',
                 hintStyle: kHintTextStyle,
@@ -119,7 +120,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               },
               keyboardType: TextInputType.number,
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.black,
                 fontFamily: 'OpenSans',
               ),
               decoration: InputDecoration(
@@ -127,7 +128,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 contentPadding: EdgeInsets.only(top: 14.0),
                 prefixIcon: Icon(
                   Icons.person,
-                  color: Colors.white,
+                  color: Colors.black,
                 ),
                 hintText: 'Enter your age',
                 hintStyle: kHintTextStyle,
@@ -155,7 +156,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               },
               keyboardType: TextInputType.emailAddress,
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.black,
                 fontFamily: 'OpenSans',
               ),
               decoration: InputDecoration(
@@ -163,7 +164,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 contentPadding: EdgeInsets.only(top: 14.0),
                 prefixIcon: Icon(
                   Icons.email,
-                  color: Colors.white,
+                  color: Colors.black,
                 ),
                 hintText: 'Enter your Email',
                 hintStyle: kHintTextStyle,
@@ -191,7 +192,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 password = val;
               },
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.black,
                 fontFamily: 'OpenSans',
               ),
               decoration: InputDecoration(
@@ -199,7 +200,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 contentPadding: EdgeInsets.only(top: 14.0),
                 prefixIcon: Icon(
                   Icons.lock,
-                  color: Colors.white,
+                  color: Colors.black,
                 ),
                 hintText: 'Enter your Password',
                 hintStyle: kHintTextStyle,
@@ -227,7 +228,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               },
               keyboardType: TextInputType.number,
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.black,
                 fontFamily: 'OpenSans',
               ),
               decoration: InputDecoration(
@@ -235,7 +236,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 contentPadding: EdgeInsets.only(top: 14.0),
                 prefixIcon: Icon(
                   Icons.phone,
-                  color: Colors.white,
+                  color: Colors.black,
                 ),
                 hintText: 'Enter phone number',
                 hintStyle: kHintTextStyle,
@@ -260,7 +261,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 country = val;
               },
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.black,
                 fontFamily: 'OpenSans',
               ),
               decoration: InputDecoration(
@@ -268,7 +269,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 contentPadding: EdgeInsets.only(top: 14.0),
                 prefixIcon: Icon(
                   Icons.map,
-                  color: Colors.white,
+                  color: Colors.black,
                 ),
                 hintText: 'Enter your country',
                 hintStyle: kHintTextStyle,
@@ -311,7 +312,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         child: Text(
           'REGISTER',
           style: TextStyle(
-            color: Color(0xFF527DAA),
+            color: Colors.black,
             letterSpacing: 1.5,
             fontSize: 18.0,
             fontWeight: FontWeight.bold,
@@ -333,7 +334,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             TextSpan(
               text: 'Already have an Account? ',
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.black,
                 fontSize: 18.0,
                 fontWeight: FontWeight.w400,
               ),
@@ -341,7 +342,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             TextSpan(
               text: 'Sign In',
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.black,
                 fontSize: 18.0,
                 fontWeight: FontWeight.bold,
               ),
@@ -357,59 +358,86 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return Scaffold(
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.light,
-        child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
-          child: Stack(
-            children: <Widget>[
-              Container(
-                height: double.infinity,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      Color(0xFF73AEF5),
-                      Color(0xFF61A4F1),
-                      Color(0xFF478DE0),
-                      Color(0xFF398AE5),
-                    ],
-                    stops: [0.1, 0.4, 0.7, 0.9],
-                  ),
+        child: CustomPaint(
+          painter: OvalPrinter(),
+          child: GestureDetector(
+            onTap: () => FocusScope.of(context).unfocus(),
+            child: Stack(
+              children: <Widget>[
+                Container(
+                  height: double.infinity,
+                  width: double.infinity,
+//                decoration: BoxDecoration(
+//                  gradient: LinearGradient(
+//                    begin: Alignment.topCenter,
+//                    end: Alignment.bottomCenter,
+//                    colors: [
+//                      Color(0xFF73AEF5),
+//                      Color(0xFF61A4F1),
+//                      Color(0xFF478DE0),
+//                      Color(0xFF398AE5),
+//                    ],
+//                    stops: [0.1, 0.4, 0.7, 0.9],
+//                  ),
+//                ),
                 ),
-              ),
-              Container(
-                height: double.infinity,
-                child: SingleChildScrollView(
-                  physics: AlwaysScrollableScrollPhysics(),
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 40.0,
-                    vertical: 120.0,
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        'Sign Up',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: 'OpenSans',
-                          fontSize: 30.0,
-                          fontWeight: FontWeight.bold,
+                Container(
+                  height: double.infinity,
+                  child: SingleChildScrollView(
+                    physics: AlwaysScrollableScrollPhysics(),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 40.0,
+                      vertical: 120.0,
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          'Sign Up',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontFamily: 'OpenSans',
+                            fontSize: 30.0,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
-                      SizedBox(height: 30.0),
-                      _buildEmailPasswordTF(),
-                      _buildRegisterBtn(),
-                      _buildSignInBtn(),
-                    ],
+                        SizedBox(height: 30.0),
+                        _buildEmailPasswordTF(),
+                        _buildRegisterBtn(),
+                        _buildSignInBtn(),
+                      ],
+                    ),
                   ),
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           ),
         ),
       ),
     );
+  }
+}
+
+class OvalPrinter extends CustomPainter {
+  Paint _paint;
+
+  OvalPrinter() {
+    _paint = Paint()
+      ..color = Colors.green
+      ..strokeCap = StrokeCap.round
+      ..strokeWidth = 10;
+  }
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    _paint.color = Color(0xfff9a825);
+    _paint.style = PaintingStyle.fill;
+    var circleRect = Offset(172, 400) & Size(500, 500);
+    canvas.drawArc(circleRect, -pi / 3, pi * 3, false, _paint);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    return false;
   }
 }

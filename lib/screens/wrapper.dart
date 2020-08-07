@@ -1,4 +1,5 @@
 import 'package:butter_app/models/user.dart';
+import 'package:butter_app/screens/home/map_service/user_info.dart';
 import 'package:butter_app/screens/profile/profile_screen.dart';
 import 'package:butter_app/screens/settings/settings_screen.dart';
 import 'package:flutter/material.dart';

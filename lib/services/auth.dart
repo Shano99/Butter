@@ -61,6 +61,8 @@ class AuthService {
       FirebaseUser user = result.user;
       await DatabaseService(uid: user.uid).createUserData(
           name, age, photoUrl, cakeDay, nickname, phoneNumber, country);
+      await DatabaseService(uid: user.uid).updatePoints(0, 0);
+      await DatabaseService(uid: user.uid).updateLocation(user.uid, null);
       return _userFromFirebaseUser(user);
     } catch (e) {
       print(e.toString());
@@ -114,6 +116,8 @@ class AuthService {
         await DatabaseService(uid: currentUser.uid).createUserData(
             name, age, photoUrl, cakeDay, nickname, phoneNumber, country);
         print("entered");
+        await DatabaseService(uid: user.uid).updatePoints(0, 0);
+        await DatabaseService(uid: user.uid).updateLocation(user.uid, null);
       }
       return _userFromFirebaseUser(currentUser);
     } catch (e) {

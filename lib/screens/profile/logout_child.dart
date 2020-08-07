@@ -12,11 +12,42 @@ class _LogoutChildState extends State<LogoutChild> {
   Widget build(BuildContext context) {
     return Container(
       child: Center(
-        child: RaisedButton(
-          child: Text("Log out"),
-          onPressed: () async {
-            await _auth.signOut();
-          },
+        child: Column(
+          children: <Widget>[
+            SizedBox(
+              height: 40,
+            ),
+            SizedBox(
+              height: 200,
+              width: 200,
+              child: Image(
+                image: AssetImage('assets/images/logout.png'),
+              ),
+            ),
+            SizedBox(
+              height: 30,
+            ),
+            RaisedButton(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30.0),
+              ),
+              color: Colors.white,
+              elevation: 8,
+              child: Text(
+                "Log out",
+                style: TextStyle(
+                  color: Color(0xfff9a825),
+                  letterSpacing: 1.5,
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'OpenSans',
+                ),
+              ),
+              onPressed: () async {
+                await _auth.signOut();
+              },
+            ),
+          ],
         ),
       ),
     );

@@ -5,6 +5,8 @@ import 'package:butter_app/shared/constants.dart';
 import 'package:provider/provider.dart';
 import 'package:butter_app/models/user.dart';
 
+//TODO: add bio
+//TODO:provision to add image from device
 class AccountChild extends StatefulWidget {
   @override
   _AccountChildState createState() => _AccountChildState();
@@ -31,19 +33,19 @@ class _AccountChildState extends State<AccountChild> {
           if (snapshot.hasData) {
             UserData userData = snapshot.data;
             return Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    Color(0xFF73AEF5),
-                    Color(0xFF61A4F1),
-                    Color(0xFF478DE0),
-                    Color(0xFF398AE5),
-                  ],
-                  stops: [0.1, 0.4, 0.7, 0.9],
-                ),
-              ),
+//              decoration: BoxDecoration(
+//                gradient: LinearGradient(
+//                  begin: Alignment.topCenter,
+//                  end: Alignment.bottomCenter,
+//                  colors: [
+//                    Color(0xFF73AEF5),
+//                    Color(0xFF61A4F1),
+//                    Color(0xFF478DE0),
+//                    Color(0xFF398AE5),
+//                  ],
+//                  stops: [0.1, 0.4, 0.7, 0.9],
+//                ),
+//              ),
               child: SingleChildScrollView(
                 physics: AlwaysScrollableScrollPhysics(),
                 padding: EdgeInsets.symmetric(
@@ -57,7 +59,7 @@ class _AccountChildState extends State<AccountChild> {
                     children: <Widget>[
                       CircleAvatar(
                         backgroundImage: userData.photoUrl == ""
-                            ? null
+                            ? AssetImage("assets/images/yellow.png")
                             : NetworkImage(userData.photoUrl),
                         radius: 80.0,
                       ),
@@ -81,7 +83,7 @@ class _AccountChildState extends State<AccountChild> {
                             });
                           },
                           style: TextStyle(
-                            color: Colors.white,
+                            color: Colors.black,
                             fontFamily: 'OpenSans',
                           ),
                           decoration: InputDecoration(
@@ -89,7 +91,7 @@ class _AccountChildState extends State<AccountChild> {
                             contentPadding: EdgeInsets.only(top: 14.0),
                             prefixIcon: Icon(
                               Icons.person,
-                              color: Colors.white,
+                              color: Colors.black,
                             ),
                             hintText: 'Enter your Name',
                             hintStyle: kHintTextStyle,
@@ -119,7 +121,7 @@ class _AccountChildState extends State<AccountChild> {
                             });
                           },
                           style: TextStyle(
-                            color: Colors.white,
+                            color: Colors.black,
                             fontFamily: 'OpenSans',
                           ),
                           decoration: InputDecoration(
@@ -127,7 +129,7 @@ class _AccountChildState extends State<AccountChild> {
                             contentPadding: EdgeInsets.only(top: 14.0),
                             prefixIcon: Icon(
                               Icons.person,
-                              color: Colors.white,
+                              color: Colors.black,
                             ),
                             hintText: 'Enter your nickname',
                             hintStyle: kHintTextStyle,
@@ -156,7 +158,7 @@ class _AccountChildState extends State<AccountChild> {
                           },
                           keyboardType: TextInputType.number,
                           style: TextStyle(
-                            color: Colors.white,
+                            color: Colors.black,
                             fontFamily: 'OpenSans',
                           ),
                           decoration: InputDecoration(
@@ -164,7 +166,7 @@ class _AccountChildState extends State<AccountChild> {
                             contentPadding: EdgeInsets.only(top: 14.0),
                             prefixIcon: Icon(
                               Icons.person,
-                              color: Colors.white,
+                              color: Colors.black,
                             ),
                             hintText: 'Enter your age',
                             hintStyle: kHintTextStyle,
@@ -195,7 +197,7 @@ class _AccountChildState extends State<AccountChild> {
                           },
                           keyboardType: TextInputType.number,
                           style: TextStyle(
-                            color: Colors.white,
+                            color: Colors.black,
                             fontFamily: 'OpenSans',
                           ),
                           decoration: InputDecoration(
@@ -203,7 +205,7 @@ class _AccountChildState extends State<AccountChild> {
                             contentPadding: EdgeInsets.only(top: 14.0),
                             prefixIcon: Icon(
                               Icons.phone,
-                              color: Colors.white,
+                              color: Colors.black,
                             ),
                             hintText: 'Enter phone number',
                             hintStyle: kHintTextStyle,
@@ -230,7 +232,7 @@ class _AccountChildState extends State<AccountChild> {
                             country = val;
                           },
                           style: TextStyle(
-                            color: Colors.white,
+                            color: Colors.black,
                             fontFamily: 'OpenSans',
                           ),
                           decoration: InputDecoration(
@@ -238,7 +240,7 @@ class _AccountChildState extends State<AccountChild> {
                             contentPadding: EdgeInsets.only(top: 14.0),
                             prefixIcon: Icon(
                               Icons.map,
-                              color: Colors.white,
+                              color: Colors.black,
                             ),
                             hintText: 'Enter your country',
                             hintStyle: kHintTextStyle,
@@ -281,11 +283,11 @@ class _AccountChildState extends State<AccountChild> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30.0),
                           ),
-                          color: Colors.white,
+                          color: PrimaryColor,
                           child: Text(
                             'UPDATE',
                             style: TextStyle(
-                              color: Color(0xFF527DAA),
+                              color: Colors.black,
                               letterSpacing: 1.5,
                               fontSize: 18.0,
                               fontWeight: FontWeight.bold,
@@ -299,7 +301,7 @@ class _AccountChildState extends State<AccountChild> {
                         child: Text(
                           error,
                           style: TextStyle(
-                            color: Colors.white,
+                            color: Colors.black,
                             fontFamily: 'OpenSans',
                             fontSize: 10.0,
                             fontWeight: FontWeight.bold,
