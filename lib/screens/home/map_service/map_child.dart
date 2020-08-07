@@ -6,14 +6,12 @@ import 'package:butter_app/shared/loading.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:geolocator/geolocator.dart';
+
 import 'package:location/location.dart';
 import 'package:latlong/latlong.dart';
 import 'package:flutter_map_marker_popup/flutter_map_marker_popup.dart';
 import 'package:provider/provider.dart';
 
-//TODO: set radius
-//TODO: change map
 class MapChild extends StatefulWidget {
   @override
   _MapChildState createState() => _MapChildState();
@@ -42,33 +40,32 @@ class _MapChildState extends State<MapChild> {
       _uids = [];
       if (locationinfo != null) {
         locationinfo.forEach((point) {
-          if (user.uid == point.uid) {
+          if (user.uid == point.uid && point.gpoint != null) {
             ind = locationinfo.indexOf(point);
-            userPoint = LatLng(point.gpoint.latitude, point.gpoint.longitude);
+            gp = LatLng(point.gpoint.latitude, point.gpoint.longitude);
           }
 
           if (point.gpoint != null) {
-            gp = LatLng(point.gpoint.latitude, point.gpoint.longitude);
             _points.add(LatLng(point.gpoint.latitude, point.gpoint.longitude));
             _uids.add(point.uid);
           }
         });
       }
-      for (var i = 0; i < _points.length - 1; i++) {
-        totalDistanceInM += distance(_points[i], userPoint);
-        if (totalDistanceInM > 50) {
-          _points.removeAt(i);
+      if (userPoint != null) {
+        for (var i = 0; i < _points.length - 1; i++) {
+          totalDistanceInM += distance(_points[i], userPoint);
+          if (totalDistanceInM > 50) {
+            _points.removeAt(i);
+          }
         }
       }
       _MapPageState()._setCurrentPoint(_points, _uids, ind);
     });
 
     return MaterialApp(
-        home: _points.isEmpty
-            ? Loading()
-            : MapPage(
-                //_mapPageStateKey
-                gp: gp),
+        home: MapPage(
+            //_mapPageStateKey
+            gp: gp),
         builder: (context, navigator) {
           return Scaffold(
             body: navigator,
@@ -110,15 +107,16 @@ class _MapPageState extends State<MapPage> {
     // TODO: implement initState
     super.initState();
 
-    location.onLocationChanged().listen((value) {
-//      setState(() {
+    location.onLocationChanged().listen((LocationData value) {
+      //  setState(() {
       currentLocation = value;
+      print(currentLocation);
       gp = LatLng(currentLocation.latitude, currentLocation.longitude);
 //        await DatabaseService(uid: uid).updateLocation(
 //            uid, GeoPoint(currentLocation.latitude, currentLocation.longitude));
-//      });
       if (currentLocation != null) updateDatabase(currentLocation);
     });
+    // });
   }
 
   void updateDatabase(LocationData cl) async {
@@ -137,6 +135,7 @@ class _MapPageState extends State<MapPage> {
   static List<LatLng> _points = [];
   static List<String> _uids = [];
   static int ind;
+
   void _setCurrentPoint(List<LatLng> points, List<String> uids, int index) {
     _points = points;
     _uids = uids;
@@ -203,9 +202,9 @@ class _MapPageState extends State<MapPage> {
         : FlutterMap(
             mapController: mapController,
             options: new MapOptions(
-              zoom: 25.0,
-              maxZoom: 25.0,
-              minZoom: 25.0,
+              zoom: 23.0,
+              maxZoom: 23.0,
+              minZoom: 23.0,
 
               center: gp,
               plugins: [PopupMarkerPlugin()],

@@ -28,7 +28,7 @@ class _UserInfoState extends State<UserInfo> {
   int count = 0;
   DateTime prevAwardTime;
   DateTime presAwardTime;
-  Duration fixedTime = new Duration(minutes: 1);
+  Duration fixedTime = new Duration(hours: 24);
   //TODO: change duration time
   Color btnColor = Colors.yellow[800];
   static int _points = -1;
@@ -142,7 +142,7 @@ class _UserInfoState extends State<UserInfo> {
         children: <Widget>[
           _buildStatItem("Age", int.parse(age)),
           _buildStatItem("Points", _points),
-          _buildStatItem("Rate", _rate),
+          _buildStatItem("Rate", _rate.round()),
         ],
       ),
     );
@@ -203,7 +203,7 @@ class _UserInfoState extends State<UserInfo> {
                 if (prevAwardTime == null) {
                   setState(() {
                     _points = _points + 1;
-                    _rate = _points ~/ 30;
+                    _rate = _points ~/ 365;
                   });
                   await DatabaseService(uid: widget.uidt).incrementPoints();
                   await DatabaseService(uid: widget.uidt)

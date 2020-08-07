@@ -13,23 +13,49 @@ class AwardChild extends StatefulWidget {
 
 class _AwardChildState extends State<AwardChild> {
   String receiverUid;
+  final Distance distance = Distance();
+  double totalDistanceInM = 0;
+  double min = 1.0 / 0.0;
+  LatLng userLocationPoint;
+  LatLng minDisPoint;
+  List<LatLng> remainingPoints = [];
+  List<String> uids = [];
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
 
     final locationinfo = Provider.of<List<UserLocation>>(context) ?? [];
-
-    if (locationinfo != null) {
-      locationinfo.forEach((point) {
-        if (user.uid != point.uid) {
-          receiverUid = point.uid;
-          //TODO: set nearest person
+    setState(() {
+      if (locationinfo != null) {
+        locationinfo.forEach((point) {
+          if (user.uid == point.uid && point.gpoint != null) {
+            userLocationPoint =
+                LatLng(point.gpoint.latitude, point.gpoint.longitude);
+          } else {
+            if (point.gpoint != null) {
+              remainingPoints
+                  .add(LatLng(point.gpoint.latitude, point.gpoint.longitude));
+              uids.add(point.uid);
+            }
+          }
+        });
+      }
+      if (userLocationPoint != null) {
+        for (var i = 0; i < remainingPoints.length - 1; i++) {
+          totalDistanceInM += distance(remainingPoints[i], userLocationPoint);
+          if (totalDistanceInM < 50 && totalDistanceInM < min) {
+            min = totalDistanceInM;
+            minDisPoint = remainingPoints[i];
+            receiverUid = uids[i];
+          }
         }
-      });
-    }
+      }
+    });
 
     return StreamProvider<PointsData>.value(
         value: DatabaseService(uid: receiverUid).pointsData,
-        child: UserInfo(uidt: receiverUid, giveruid: user.uid));
+        child: receiverUid == null
+            ? Loading()
+            : UserInfo(uidt: receiverUid, giveruid: user.uid));
   }
 }
